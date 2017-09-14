@@ -1,7 +1,7 @@
 const {
 	Client
 } = require('discord.js');
-const tokens = "BOT TOKEN";
+const tokens = "BOT TOKEN HERE";
 
 const client = new Client();
 const prefix = ".";
@@ -14,8 +14,8 @@ client.user.setGame('running.');
 client.on('message', message =>{
   const commands = {
     'help': (message) => {
-  		let tosend = ['```xl', 'JavaScript version: "1.0.0"','Swift Version: "0.0.1"', '\ncommands anyone can use:'.toUpperCase(), prefix + 'role your role : "Assigns the mentioned role"', prefix + "8ball your question? : \"Answers your weirdest questions\"", prefix + 'avatar : "Sends a direct link to your avatar"', "\n", 'commands for admins/mods only:'.toUpperCase(), prefix + 'kick @member : "kicks the mentioned user"', prefix + 'ban @member : "bans the mentioned user"', prefix + 'purge ### : "Deletes up to 100 messages."', '```'];
-  		message.channel.sendMessage(tosend.join('\n'));
+			let tosend = ['```xl', 'JavaScript version: "1.0.0"','Swift Version: "0.0.1"', '\ncommands anyone can use:'.toUpperCase(), prefix + 'nick your nickname : "Changes your nickname on this server"' ,prefix + 'role your role : "Assigns the mentioned role"', prefix + "8ball your question? : \"Answers your weirdest questions\"", prefix + 'avatar : "Sends a direct link to your avatar"', "\n", 'commands for admins/mods only:'.toUpperCase(), prefix + 'kick @member : "kicks the mentioned user"', prefix + 'ban @member : "bans the mentioned user"', prefix + 'purge ### : "Deletes up to 100 messages."', '```'];
+			message.channel.sendMessage(tosend.join('\n'));
   	},
   	'reboot': (message) => {
   		if (message.author.id == adminID) {
@@ -93,9 +93,23 @@ client.on('message', message =>{
       else{
         message.reply('You cannot do that.');
       }
-    }
+		},
+		'nick':(message) =>{
+			if(message.member.hasPermission("READ_MESSAGES")){
+			var msg = message.content.split(' ');
+			msg.splice(0, 1);
+			var nick = msg.join(' ');
+			//var authorAt = message.mentions.members.first();
+			
+			message.member.setNickname(nick).then(user => message.reply(`I hope you like your new nickname: ${nick}`));
 
-
+		}
+		else{
+			message.reply("XD");
+		}
+	
+	}
+	
   }
   if (!message.content.startsWith(prefix)) return;
 	if (commands.hasOwnProperty(message.content.toLowerCase().slice(prefix.length).split(' ')[0])) commands[message.content.toLowerCase().slice(prefix.length).split(' ')[0]](message);
