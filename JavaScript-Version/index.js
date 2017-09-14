@@ -26,7 +26,7 @@ client.on('message', message => {
 				description: "Current version: __**0.3.1**__",
 				fields: [{
 					name: "Moderation :hammer_pick:",
-					value: ".kick @member : kicks the mentioned user \n.ban @member : bans the mentioned user\n.purge ### : Deletes up to 100 messages."
+					value: ".kick @member : kicks the mentioned user.\n.ban @member : bans the mentioned user\n.purge ### : Deletes up to 100 messages."
 				  },
 				  {
 					name: "Commands anyone can use",
@@ -137,7 +137,7 @@ client.on('message', message => {
 
 		},
 		'status':(message) =>{
-			if(message.author.id= adminID){
+			if(message.author.id == adminID){
 				var msg = message.content.split(' ');
 				msg.splice(0, 1);
 				var status = msg.join(' ');
@@ -145,9 +145,10 @@ client.on('message', message => {
 				message.reply("done.");
 			}
 			else{
-				message.reply("you cant do that.")
+				message.reply("you can't do that.");
 			}
-		}
+		},
+		
 
 	}
 	if (!message.content.startsWith(prefix)) return;
