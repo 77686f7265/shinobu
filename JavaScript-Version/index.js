@@ -5,7 +5,7 @@ const tokens = "BOT TOKEN HERE";
 
 const client = new Client();
 const prefix = ".";
-const adminID = "343694615888658443";
+const adminID = "YOUR ID HERE";
 client.on('ready', () => {
 	console.log('running.');
 	client.user.setGame('running.');
