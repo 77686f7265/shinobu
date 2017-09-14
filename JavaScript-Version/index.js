@@ -26,7 +26,7 @@ client.on('message', message => {
 				description: "Current version: __**0.3.1**__",
 				fields: [{
 					name: "Moderation :hammer_pick:",
-					value: ".kick @member : \n.ban @member : bans the mentioned user\n.purge ### : Deletes up to 100 messages."
+					value: ".kick @member : kicks the mentioned user \n.ban @member : bans the mentioned user\n.purge ### : Deletes up to 100 messages."
 				  },
 				  {
 					name: "Commands anyone can use",
