@@ -15,8 +15,36 @@ client.on('ready', () => {
 client.on('message', message => {
 	const commands = {
 		'help': (message) => {
-			let tosend = ['```xl',"Feel free to contact NyanpasuOWO#2834 if you have any question" ,'\ncommands anyone can use:'.toUpperCase(), prefix + 'nick your nickname : "Changes your nickname on this server"', prefix + 'role your role : "Assigns the mentioned role"', prefix + "8ball your question? : \"Answers your weirdest questions\"", prefix + 'avatar : "Sends a direct link to your avatar"', "\n", 'commands for admins/mods only:'.toUpperCase(), prefix + 'kick @member : "kicks the mentioned user"', prefix + 'ban @member : "bans the mentioned user"', prefix + 'purge ### : "Deletes up to 100 messages."', '```'];
-			message.channel.sendMessage(tosend.join('\n'));
+			
+			message.channel.send({embed: {
+				color: 3447003,
+				author: {
+				  name: client.user.username,
+				  icon_url: client.user.avatarURL
+				},
+				title: "Shinobu's command list",
+				description: "Current version: __**0.3.1**__",
+				fields: [{
+					name: "Moderation :hammer_pick:",
+					value: ".kick @member : \n.ban @member : bans the mentioned user\n.purge ### : Deletes up to 100 messages."
+				  },
+				  {
+					name: "Commands anyone can use",
+					value: ".nick your nickname: Changes your nickname on this server.\n.role your role: Assigns the role you want(as long as It doesn't require special permissions.)\n.8ball your question: Answers your weirdest questions.\n.avatar: Sends a direct link to your avatar."
+				  },
+				  {
+					name: "Support",
+					value: "Add NyanpasuOWO#2834 if you need help."
+				  }
+				],
+				timestamp: new Date(),
+				footer: {
+				  icon_url: client.user.avatarURL,
+				  text: client.user.username
+				}
+			  }
+			});
+			
 		},
 		'reboot': (message) => {
 			if (message.author.id == adminID) {
