@@ -5,17 +5,17 @@ const tokens = "BOT TOKEN HERE";
 
 const client = new Client();
 const prefix = ".";
-const adminID = "ID	";
+const adminID = "353655562447355905";
 client.on('ready', () => {
 	console.log('Ready!');
-	client.user.setGame('With Araragi!');
+	client.user.setGame('nyanpasuowo.github.io');
 	
 });
 
 client.on('message', message => {
 	const commands = {
 		'help': (message) => {
-			let tosend = ['```xl', 'JavaScript version: "1.0.0"', 'Swift Version: "0.0.1"', '\ncommands anyone can use:'.toUpperCase(), prefix + 'nick your nickname : "Changes your nickname on this server"', prefix + 'role your role : "Assigns the mentioned role"', prefix + "8ball your question? : \"Answers your weirdest questions\"", prefix + 'avatar : "Sends a direct link to your avatar"', "\n", 'commands for admins/mods only:'.toUpperCase(), prefix + 'kick @member : "kicks the mentioned user"', prefix + 'ban @member : "bans the mentioned user"', prefix + 'purge ### : "Deletes up to 100 messages."', '```'];
+			let tosend = ['```xl',"Feel free to contact NyanpasuOWO#2834 if you have any question" ,'\ncommands anyone can use:'.toUpperCase(), prefix + 'nick your nickname : "Changes your nickname on this server"', prefix + 'role your role : "Assigns the mentioned role"', prefix + "8ball your question? : \"Answers your weirdest questions\"", prefix + 'avatar : "Sends a direct link to your avatar"', "\n", 'commands for admins/mods only:'.toUpperCase(), prefix + 'kick @member : "kicks the mentioned user"', prefix + 'ban @member : "bans the mentioned user"', prefix + 'purge ### : "Deletes up to 100 messages."', '```'];
 			message.channel.sendMessage(tosend.join('\n'));
 		},
 		'reboot': (message) => {
@@ -115,10 +115,10 @@ client.on('message', message => {
 client.on('guildMemberAdd', member => {
 	const channel = member.guild.channels.find('name', 'general');
 	const rulesChannel = member.guild.channels.find('name', 'rules');
-	const newComer = member.guild.roles.find('name', 'Newcomer');
+	//const newComer = member.guild.roles.find('name', 'Newcomer');
 	if (!channel) return;
 	channel.send(`Welcome to the server, ${member}. Don't forget to check the ${rulesChannel}!`);
-	member.addRole(newComer);
+	//member.addRole(newComer);
 
 });
 client.login(tokens);
