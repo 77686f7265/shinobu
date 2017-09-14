@@ -14,7 +14,7 @@ client.on('ready', () => {
 client.on('message', message => {
 	const commands = {
 		'help': (message) => {
-			let tosend = ['```xl', 'JavaScript version: "1.0.0"', 'Swift Version: "0.0.1"', '\ncommands anyone can use:'.toUpperCase(), prefix + 'nick your nickname : "Changes your nickname on this server"', prefix + 'role your role : "Assigns the mentioned role"', prefix + "8ball your question? : \"Answers your weirdest questions\"", prefix + 'avatar : "Sends a direct link to your avatar"', "\n", 'commands for admins/mods only:'.toUpperCase(), prefix + 'kick @member : "kicks the mentioned user"', prefix + 'ban @member : "bans the mentioned user"', prefix + 'purge ### : "Deletes up to 100 messages."', '```'];
+			let tosend = ['```xl', 'JavaScript version: "1.0.1"', 'Swift Version: "0.0.1"', '\ncommands anyone can use:'.toUpperCase(), prefix + 'nick your nickname : "Changes your nickname on this server"', prefix + 'role your role : "Assigns the mentioned role"', prefix + "8ball your question? : \"Answers your weirdest questions\"", prefix + 'avatar : "Sends a direct link to your avatar"', "\n", 'commands for admins/mods only:'.toUpperCase(), prefix + 'kick @member : "kicks the mentioned user"', prefix + 'ban @member : "bans the mentioned user"', prefix + 'purge ### : "Deletes up to 100 messages."', '```'];
 			message.channel.sendMessage(tosend.join('\n'));
 		},
 		'reboot': (message) => {

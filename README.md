@@ -6,7 +6,7 @@
 </p>
 
 
-#### Current version: `1.1.1`
+#### Current version: `1.0.1`
 
 ## What can this bot do?
 
@@ -15,10 +15,11 @@ Renge can do several things, she can play music, answer your questions, ban/kick
 Here is a full list of what she does:
 
 ```xl
-JavaScript version: "1.0.0"
+JavaScript version: "1.0.1"
 Swift Version: "0.0.1"
 
 COMMANDS ANYONE CAN USE:
+.nick your nickname : "Changes your nickname on this server"
 .role your role : "Assigns the mentioned role"
 .8ball your question? : "Answers your weirdest questions"
 .avatar : "Sends a direct link to your avatar"
