@@ -1,4 +1,4 @@
-# shinobu
+# Shinobu | 忍
 
 
 <p align="center">
