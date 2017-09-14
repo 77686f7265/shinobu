@@ -6,6 +6,8 @@ const tokens = "BOT TOKEN HERE";
 const client = new Client();
 const prefix = ".";
 const adminID = "353655562447355905";
+const fs = require("fs");
+let points = JSON.parse(fs.readFileSync("./points.json", "utf8"));
 client.on('ready', () => {
 	console.log('Ready!');
 	client.user.setGame('nyanpasuowo.github.io');
@@ -30,7 +32,7 @@ client.on('message', message => {
 				  },
 				  {
 					name: "Commands anyone can use",
-					value: ".nick your nickname: Changes your nickname on this server.\n.role your role: Assigns the role you want(as long as It doesn't require special permissions.)\n.8ball your question: Answers your weirdest questions.\n.avatar: Sends a direct link to your avatar."
+					value: ".level : check your current level\n.nick your nickname: Changes your nickname on this server.\n.role your role: Assigns the role you want(as long as It doesn't require special permissions.)\n.8ball your question: Answers your weirdest questions.\n.avatar: Sends a direct link to your avatar."
 				  },
 				  {
 					name: "Support",
@@ -151,6 +153,67 @@ client.on('message', message => {
 		
 
 	}
+	if (!points[message.author.id]) points[message.author.id] = {
+		points: 0,
+		level: 0
+	  };
+	  let userData = points[message.author.id];
+	  userData.points++;
+	
+	  let curLevel = Math.floor(0.1 * Math.sqrt(userData.points));
+	  
+	 switch (userData.points) {
+		 case 10:
+			 message.reply("You are now level 1!");
+			 userData.level = 1;
+			 break;
+		case 20:
+			message.reply("You are now level 2!");
+			userData.level = 2;	
+			break;
+		case 30:
+			message.reply("You are now level 3!");
+			userData.level = 3;
+			break;
+		case 40:
+			message.reply("You are now level 4!");
+			userData.level = 4;
+		case 50:
+			message.reply("You are now level 5!");
+			userData.level = 5;
+		case 60:
+			message.reply("You are now level 6!");
+			userData.level = 6;
+		case 70:
+			message.reply("You are now level 7!");
+			userData.level = 7;
+		case 80:
+			message.reply("You are now level 8!");
+			userData.level = 8;
+			break;
+		case 90:
+			message.reply("You are now level 9!");
+			userData.level = 9;
+			break;
+		case 100:
+			message.reply("You are now level 10! You have reached the maximum level. :party:");
+			userData.level = 10;
+			break;
+		 default:
+			 break;
+	 } 
+	  /*if(userData.points == 10 || userData.points == 20){
+		  userData.level = 1;
+		  message.reply("You have leveled up to **level 1**. ");
+	  }*/
+	
+	  if (message.content.startsWith(prefix + "level")) {
+		message.reply(`You are currently level ${userData.level}, with ${userData.points} points.`);
+	  }
+	  fs.writeFile("./points.json", JSON.stringify(points), (err) => {
+		if (err) console.error(err)
+	  });
+	
 	if (!message.content.startsWith(prefix)) return;
 	if (commands.hasOwnProperty(message.content.toLowerCase().slice(prefix.length).split(' ')[0])) commands[message.content.toLowerCase().slice(prefix.length).split(' ')[0]](message);
 });
