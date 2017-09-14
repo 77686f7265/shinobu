@@ -5,16 +5,17 @@ const tokens = "BOT TOKEN HERE";
 
 const client = new Client();
 const prefix = ".";
-const adminID = "YOUR ID HERE";
+const adminID = "ID	";
 client.on('ready', () => {
-	console.log('running.');
-	client.user.setGame('running.');
+	console.log('Ready!');
+	client.user.setGame('With Araragi!');
+	
 });
 
 client.on('message', message => {
 	const commands = {
 		'help': (message) => {
-			let tosend = ['```xl', 'JavaScript version: "1.0.1"', 'Swift Version: "0.0.1"', '\ncommands anyone can use:'.toUpperCase(), prefix + 'nick your nickname : "Changes your nickname on this server"', prefix + 'role your role : "Assigns the mentioned role"', prefix + "8ball your question? : \"Answers your weirdest questions\"", prefix + 'avatar : "Sends a direct link to your avatar"', "\n", 'commands for admins/mods only:'.toUpperCase(), prefix + 'kick @member : "kicks the mentioned user"', prefix + 'ban @member : "bans the mentioned user"', prefix + 'purge ### : "Deletes up to 100 messages."', '```'];
+			let tosend = ['```xl', 'JavaScript version: "1.0.0"', 'Swift Version: "0.0.1"', '\ncommands anyone can use:'.toUpperCase(), prefix + 'nick your nickname : "Changes your nickname on this server"', prefix + 'role your role : "Assigns the mentioned role"', prefix + "8ball your question? : \"Answers your weirdest questions\"", prefix + 'avatar : "Sends a direct link to your avatar"', "\n", 'commands for admins/mods only:'.toUpperCase(), prefix + 'kick @member : "kicks the mentioned user"', prefix + 'ban @member : "bans the mentioned user"', prefix + 'purge ### : "Deletes up to 100 messages."', '```'];
 			message.channel.sendMessage(tosend.join('\n'));
 		},
 		'reboot': (message) => {
@@ -38,7 +39,7 @@ client.on('message', message => {
 					limit: amountToDelete++
 				}).then(messages => message.channel.bulkDelete(messages));
 				console.log(amountToDelete);
-				message.channel.sendMessage(`${amountToDelete - 1} messages have been deleted.`).then(response => response.delete(3000));
+				message.channel.sendMessage(`${amountToDelete - 1} messages have been deleted. :wastebasket:`).then(response => response.delete(3000));
 			}
 		},
 		'role': (message) => {
