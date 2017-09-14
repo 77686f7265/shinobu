@@ -178,15 +178,19 @@ client.on('message', message => {
 		case 40:
 			message.reply("You are now level 4!");
 			userData.level = 4;
+			break;
 		case 50:
 			message.reply("You are now level 5!");
 			userData.level = 5;
+			break;
 		case 60:
 			message.reply("You are now level 6!");
 			userData.level = 6;
+			break;
 		case 70:
 			message.reply("You are now level 7!");
 			userData.level = 7;
+			break;
 		case 80:
 			message.reply("You are now level 8!");
 			userData.level = 8;
