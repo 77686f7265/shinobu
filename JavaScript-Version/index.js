@@ -134,6 +134,19 @@ client.on('message', message => {
 				message.reply("XD");
 			}
 
+
+		},
+		'status':(message) =>{
+			if(message.author.id= adminID){
+				var msg = message.content.split(' ');
+				msg.splice(0, 1);
+				var status = msg.join(' ');
+				client.user.setGame(status);
+				message.reply("done.");
+			}
+			else{
+				message.reply("you cant do that.")
+			}
 		}
 
 	}
