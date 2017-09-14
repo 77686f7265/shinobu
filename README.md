@@ -10,7 +10,7 @@
 
 ## What can this bot do?
 
-Shinobu can do several things, she can play music, answer your questions, ban/kick people, assign roles to people etc...
+Shinobu can do several things, answer your questions, ban/kick people, assign roles to people etc...
 
 Here is a full list of what she does:
 
