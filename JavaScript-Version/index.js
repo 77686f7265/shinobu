@@ -25,7 +25,7 @@ client.on('message', message => {
 				  icon_url: client.user.avatarURL
 				},
 				title: "Shinobu's command list",
-				description: "Current version: __**0.3.1**__",
+				description: "Current version: __**0.6.0**__",
 				fields: [{
 					name: "Moderation :hammer_pick:",
 					value: ".kick @member : kicks the mentioned user.\n.ban @member : bans the mentioned user\n.purge ### : Deletes up to 100 messages."
