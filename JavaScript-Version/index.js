@@ -25,14 +25,18 @@ client.on('message', message => {
 				  icon_url: client.user.avatarURL
 				},
 				title: "Shinobu's command list",
-				description: "Current version: __**0.6.0**__",
+				description: "Current version: __**0.6.3**__\nCommands that require an argument are highlighted like this: **argument**",
 				fields: [{
 					name: "Moderation :hammer_pick:",
-					value: ".kick @member : kicks the mentioned user.\n.ban @member : bans the mentioned user\n.purge ### : Deletes up to 100 messages."
+					value: ".kick **@member** : kicks the mentioned user.\n.ban **@member** : bans the mentioned user\n.purge **###** : Deletes up to 100 messages."
 				  },
 				  {
 					name: "Commands anyone can use",
-					value: ".level : check your current level\n.nick your nickname: Changes your nickname on this server.\n.role your role: Assigns the role you want(as long as It doesn't require special permissions.)\n.8ball your question: Answers your weirdest questions.\n.avatar: Sends a direct link to your avatar."
+					value: ".quote : Prints out a random quote\n.nick **your nickname**: Changes your nickname on this server.\n.role **your role**: Assigns the role you want(as long as It doesn't require special permissions.)\n.8ball **your question **: Answers your weirdest questions.\n.avatar: Sends a direct link to your avatar."
+				  },
+				  {
+					name: "Levels",
+					value: ".level **current** : Check your current level\n.level **reset** : Resets your level"
 				  },
 				  {
 					name: "Support",
@@ -53,7 +57,7 @@ client.on('message', message => {
 				process.exit();
 
 			} else {
-				message.reply("You are not my creator, you cannot restart me. ask `キスショット・アセロラオリオン・ハートアンダーブレード#2834` if it is really needed.");
+				message.reply("You are not my creator, you cannot restart me. ask `Nyanpasuowo#2834` if it is really needed.");
 			}
 		},
 		'avatar': (message) => {
@@ -150,6 +154,11 @@ client.on('message', message => {
 				message.reply("you can't do that.");
 			}
 		},
+		'quote':(message) =>{
+			var quotes = ['It\'s not good to expect too much, but you can\'t do anything if you\'re being overly pessimistic. If you just wait thinking it\'s useless, nothing will come of it.', 'No matter what bonds you forge with others, time will tear them apart. Well... Doesn\'t thinking about it make you sick?', 'It\'s difficult to change the world on your own, but twisting it a little might not be all that hard.', 'There\'s no reason a fake can\'t do what the real thing would. And it\'s possible for a fake to be more real than the real thing.', 'The sun is my enemy, but the moon has been good to me.'];
+			var randomQuotes = quotes[Math.floor(Math.random() * quotes.length)];
+			message.channel.send(randomQuotes);
+		}
 		
 
 	}
@@ -212,7 +221,16 @@ client.on('message', message => {
 	  }*/
 	
 	  if (message.content.startsWith(prefix + "level")) {
+		  var args = message.content.split(' ');
+		  if(args[1] == 'current'){
 		message.reply(`You are currently level ${userData.level}, with ${userData.points} points.`);
+	}
+		if(args[1] == 'reset'){
+			userData.points = 0;
+			userData.level = 0;
+			message.reply("Successfully reinitiliazed your level and points");
+
+		}
 	  }
 	  fs.writeFile("./points.json", JSON.stringify(points), (err) => {
 		if (err) console.error(err)
@@ -226,7 +244,7 @@ client.on('guildMemberAdd', member => {
 	const rulesChannel = member.guild.channels.find('name', 'rules');
 	//const newComer = member.guild.roles.find('name', 'Newcomer');
 	if (!channel) return;
-	channel.send(`Welcome to the server, ${member}. Don't forget to check the ${rulesChannel}!`);
+	channel.send(`Welcome to the server, ${member}. Don't forget to check the rules!`);
 	//member.addRole(newComer);
 
 });
