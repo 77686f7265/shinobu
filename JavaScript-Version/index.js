@@ -1,8 +1,9 @@
 const {
 	Client
 } = require('discord.js');
-const tokens = "BOT TOKEN HERE";
 
+const tokens = require("./token.json");
+/////////////////////////// STOP /////////////////////////////
 const client = new Client();
 const prefix = ".";
 const adminID = "353655562447355905";
@@ -10,47 +11,49 @@ const fs = require("fs");
 let points = JSON.parse(fs.readFileSync("./points.json", "utf8"));
 client.on('ready', () => {
 	console.log('Ready!');
-	client.user.setGame('nyanpasuowo.github.io');
-	
+	//client.user.setGame('nyanpasuowo.github.io');
+	client.user.setGame("nyanpasuowo.github.io");
+
 });
 
 client.on('message', message => {
 	const commands = {
 		'help': (message) => {
-			
-			message.channel.send({embed: {
-				color: 3447003,
-				author: {
-				  name: client.user.username,
-				  icon_url: client.user.avatarURL
-				},
-				title: "Shinobu's command list",
-				description: "Current version: __**0.6.3**__\nCommands that require an argument are highlighted like this: **argument**",
-				fields: [{
-					name: "Moderation :hammer_pick:",
-					value: ".kick **@member** : kicks the mentioned user.\n.ban **@member** : bans the mentioned user\n.purge **###** : Deletes up to 100 messages."
-				  },
-				  {
-					name: "Commands anyone can use",
-					value: ".quote : Prints out a random quote\n.nick **your nickname**: Changes your nickname on this server.\n.role **your role**: Assigns the role you want(as long as It doesn't require special permissions.)\n.8ball **your question **: Answers your weirdest questions.\n.avatar: Sends a direct link to your avatar."
-				  },
-				  {
-					name: "Levels",
-					value: ".level **current** : Check your current level\n.level **reset** : Resets your level"
-				  },
-				  {
-					name: "Support",
-					value: "Add NyanpasuOWO#2834 if you need help."
-				  }
-				],
-				timestamp: new Date(),
-				footer: {
-				  icon_url: client.user.avatarURL,
-				  text: client.user.username
+
+			message.channel.send({
+				embed: {
+					color: 3447003,
+					author: {
+						name: client.user.username,
+						icon_url: client.user.avatarURL
+					},
+					title: "Shinobu's command list",
+					description: "Current version: __**0.6.3**__\nCommands that require an argument are highlighted like this: **argument**",
+					fields: [{
+							name: "Moderation :hammer_pick:",
+							value: ".kick **@member** : kicks the mentioned user.\n.ban **@member** : bans the mentioned user\n.purge **###** : Deletes up to 100 messages."
+						},
+						{
+							name: "Commands anyone can use",
+							value: ".quote : Prints out a random quote\n.nick **your nickname**: Changes your nickname on this server.\n.role **your role**: Assigns the role you want(as long as It doesn't require special permissions.)\n.8ball **your question **: Answers your weirdest questions.\n.avatar: Sends a direct link to your avatar."
+						},
+						{
+							name: "Levels",
+							value: ".level **current** : Check your current level\n.level **reset** : Resets your level"
+						},
+						{
+							name: "Support",
+							value: "Add NyanpasuOWO#2834 if you need help."
+						}
+					],
+					timestamp: new Date(),
+					footer: {
+						icon_url: client.user.avatarURL,
+						text: client.user.username
+					}
 				}
-			  }
 			});
-			
+
 		},
 		'reboot': (message) => {
 			if (message.author.id == adminID) {
@@ -141,44 +144,43 @@ client.on('message', message => {
 			}
 
 
-		},
-		'status':(message) =>{
-			if(message.author.id == adminID){
+		}, ///for bot owner only
+		'status': (message) => {
+			if (message.author.id == adminID) {
 				var msg = message.content.split(' ');
 				msg.splice(0, 1);
 				var status = msg.join(' ');
 				client.user.setGame(status);
 				message.reply("done.");
-			}
-			else{
+			} else {
 				message.reply("you can't do that.");
 			}
 		},
-		'quote':(message) =>{
+		'quote': (message) => {
 			var quotes = ['It\'s not good to expect too much, but you can\'t do anything if you\'re being overly pessimistic. If you just wait thinking it\'s useless, nothing will come of it.', 'No matter what bonds you forge with others, time will tear them apart. Well... Doesn\'t thinking about it make you sick?', 'It\'s difficult to change the world on your own, but twisting it a little might not be all that hard.', 'There\'s no reason a fake can\'t do what the real thing would. And it\'s possible for a fake to be more real than the real thing.', 'The sun is my enemy, but the moon has been good to me.'];
 			var randomQuotes = quotes[Math.floor(Math.random() * quotes.length)];
 			message.channel.send(randomQuotes);
 		}
-		
+
 
 	}
 	if (!points[message.author.id]) points[message.author.id] = {
 		points: 0,
 		level: 0
-	  };
-	  let userData = points[message.author.id];
-	  userData.points++;
-	
-	  let curLevel = Math.floor(0.1 * Math.sqrt(userData.points));
-	  
-	 switch (userData.points) {
-		 case 10:
-			 message.reply("You are now level 1!");
-			 userData.level = 1;
-			 break;
+	};
+	let userData = points[message.author.id];
+	userData.points++;
+
+	let curLevel = Math.floor(0.1 * Math.sqrt(userData.points));
+
+	switch (userData.points) {
+		case 10:
+			message.reply("You are now level 1!");
+			userData.level = 1;
+			break;
 		case 20:
 			message.reply("You are now level 2!");
-			userData.level = 2;	
+			userData.level = 2;
 			break;
 		case 30:
 			message.reply("You are now level 3!");
@@ -212,30 +214,30 @@ client.on('message', message => {
 			message.reply("You are now level 10! You have reached the maximum level. :party:");
 			userData.level = 10;
 			break;
-		 default:
-			 break;
-	 } 
-	  /*if(userData.points == 10 || userData.points == 20){
+		default:
+			break;
+	}
+	/*if(userData.points == 10 || userData.points == 20){
 		  userData.level = 1;
 		  message.reply("You have leveled up to **level 1**. ");
 	  }*/
-	
-	  if (message.content.startsWith(prefix + "level")) {
-		  var args = message.content.split(' ');
-		  if(args[1] == 'current'){
-		message.reply(`You are currently level ${userData.level}, with ${userData.points} points.`);
-	}
-		if(args[1] == 'reset'){
+
+	if (message.content.startsWith(prefix + "level")) {
+		var args = message.content.split(' ');
+		if (args[1] == 'current') {
+			message.reply(`You are currently level ${userData.level}, with ${userData.points} points.`);
+		}
+		if (args[1] == 'reset') {
 			userData.points = 0;
 			userData.level = 0;
 			message.reply("Successfully reinitiliazed your level and points");
 
 		}
-	  }
-	  fs.writeFile("./points.json", JSON.stringify(points), (err) => {
+	}
+	fs.writeFile("./points.json", JSON.stringify(points), (err) => {
 		if (err) console.error(err)
-	  });
-	
+	});
+
 	if (!message.content.startsWith(prefix)) return;
 	if (commands.hasOwnProperty(message.content.toLowerCase().slice(prefix.length).split(' ')[0])) commands[message.content.toLowerCase().slice(prefix.length).split(' ')[0]](message);
 });
@@ -248,4 +250,4 @@ client.on('guildMemberAdd', member => {
 	//member.addRole(newComer);
 
 });
-client.login(tokens);
+client.login(tokens.token);
