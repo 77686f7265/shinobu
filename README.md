@@ -6,7 +6,7 @@
 </p>
 
 
-#### Current version: `0.6.0`
+#### Current version: `0.7.1`
 
 ## What can this bot do?
 
@@ -14,9 +14,7 @@ Shinobu can do several things, answer your questions, ban/kick people, assign ro
 
 Here is a full list of what she does:
 
-```xl
-JavaScript version: "0.3.1"
-Swift Version: "0.0.1"
+```
 
 COMMANDS ANYONE CAN USE:
 .nick your nickname : "Changes your nickname on this server"

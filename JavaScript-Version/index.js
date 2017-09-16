@@ -29,11 +29,11 @@ client.on('message', message => {
 					title: "Shinobu's command list",
 					description: "Current version: __**0.7.0**__\nCommands that require an argument are highlighted like this: **argument**",
 					fields: [{
-							name: "Moderation :hammer_pick:",
+							name: ":hammer_pick: Moderation :hammer_pick:",
 							value: ".kick **@member** : kicks the mentioned user.\n.ban **@member** : bans the mentioned user\n.purge **###** : Deletes up to 100 messages."
 						},
 						{
-							name: "Commands anyone can use",
+							name: ":white_check_mark: Commands anyone can use :white_check_mark: ",
 							value: ".quote : Prints out a random quote\n.nick **your nickname**(if no argument is specified, it will remove your current nickname): Changes your nickname on this server.\n.role **your role**: Assigns the role you want(as long as It doesn't require special permissions.)\n.8ball **your question **: Answers your weirdest questions.\n.avatar: Sends a direct link to your avatar."
 						},
 						{
@@ -41,7 +41,7 @@ client.on('message', message => {
 							value: ".level **current** : Check your current level\n.level **reset** : Resets your level"
 						},
 						{
-							name: "Support",
+							name: ":telephone_receiver: Support :telephone_receiver:",
 							value: "Add NyanpasuOWO#2834 if you need help."
 						}
 					],
@@ -63,6 +63,7 @@ client.on('message', message => {
 			}
 		},
 		'avatar': (message) => {
+			
 			message.reply(message.author.avatarURL)
 		},
 		'purge': (message) => {
