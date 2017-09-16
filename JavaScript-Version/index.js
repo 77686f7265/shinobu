@@ -11,7 +11,6 @@ const fs = require("fs");
 let points = JSON.parse(fs.readFileSync("./points.json", "utf8"));
 client.on('ready', () => {
 	console.log('Ready!');
-	//client.user.setGame('nyanpasuowo.github.io');
 	client.user.setGame("nyanpasuowo.github.io");
 
 });
@@ -28,14 +27,14 @@ client.on('message', message => {
 						icon_url: client.user.avatarURL
 					},
 					title: "Shinobu's command list",
-					description: "Current version: __**0.6.3**__\nCommands that require an argument are highlighted like this: **argument**",
+					description: "Current version: __**0.7.0**__\nCommands that require an argument are highlighted like this: **argument**",
 					fields: [{
 							name: "Moderation :hammer_pick:",
 							value: ".kick **@member** : kicks the mentioned user.\n.ban **@member** : bans the mentioned user\n.purge **###** : Deletes up to 100 messages."
 						},
 						{
 							name: "Commands anyone can use",
-							value: ".quote : Prints out a random quote\n.nick **your nickname**: Changes your nickname on this server.\n.role **your role**: Assigns the role you want(as long as It doesn't require special permissions.)\n.8ball **your question **: Answers your weirdest questions.\n.avatar: Sends a direct link to your avatar."
+							value: ".quote : Prints out a random quote\n.nick **your nickname**(if no argument is specified, it will remove your current nickname): Changes your nickname on this server.\n.role **your role**: Assigns the role you want(as long as It doesn't require special permissions.)\n.8ball **your question **: Answers your weirdest questions.\n.avatar: Sends a direct link to your avatar."
 						},
 						{
 							name: "Levels",
@@ -131,18 +130,19 @@ client.on('message', message => {
 			}
 		},
 		'nick': (message) => {
-			if (message.member.hasPermission("READ_MESSAGES")) {
+				
 				var msg = message.content.split(' ');
+				if(msg.length < 1){
 				msg.splice(0, 1);
 				var nick = msg.join(' ');
 				//var authorAt = message.mentions.members.first();
 
 				message.member.setNickname(nick).then(user => message.reply(`I hope you like your new nickname: ${nick}`));
-
-			} else {
-				message.reply("XD");
 			}
-
+			else{
+				message.reply("Your nickname has been reset");
+			}
+			
 
 		}, ///for bot owner only
 		'status': (message) => {
@@ -160,6 +160,18 @@ client.on('message', message => {
 			var quotes = ['It\'s not good to expect too much, but you can\'t do anything if you\'re being overly pessimistic. If you just wait thinking it\'s useless, nothing will come of it.', 'No matter what bonds you forge with others, time will tear them apart. Well... Doesn\'t thinking about it make you sick?', 'It\'s difficult to change the world on your own, but twisting it a little might not be all that hard.', 'There\'s no reason a fake can\'t do what the real thing would. And it\'s possible for a fake to be more real than the real thing.', 'The sun is my enemy, but the moon has been good to me.'];
 			var randomQuotes = quotes[Math.floor(Math.random() * quotes.length)];
 			message.channel.send(randomQuotes);
+		},
+		'level':(message) =>{
+			var args = message.content.split(' ');
+			if (args[1] == 'current') {
+				message.reply(`You are currently level ${userData.level}, with ${userData.points} points.`);
+			}
+			if (args[1] == 'reset') {
+				userData.points = 0;
+				userData.level = 0;
+				message.reply("Successfully reinitiliazed your level and points");
+	
+			}
 		}
 
 
@@ -222,18 +234,7 @@ client.on('message', message => {
 		  message.reply("You have leveled up to **level 1**. ");
 	  }*/
 
-	if (message.content.startsWith(prefix + "level")) {
-		var args = message.content.split(' ');
-		if (args[1] == 'current') {
-			message.reply(`You are currently level ${userData.level}, with ${userData.points} points.`);
-		}
-		if (args[1] == 'reset') {
-			userData.points = 0;
-			userData.level = 0;
-			message.reply("Successfully reinitiliazed your level and points");
-
-		}
-	}
+	
 	fs.writeFile("./points.json", JSON.stringify(points), (err) => {
 		if (err) console.error(err)
 	});
