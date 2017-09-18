@@ -6,7 +6,7 @@
 </p>
 
 
-#### Current version: `0.7.1`
+#### Current version: `1.0.0`
 
 ## What can this bot do?
 
@@ -21,7 +21,7 @@ COMMANDS ANYONE CAN USE:
 .role your role : "Assigns the mentioned role"
 .8ball your question? : "Answers your weirdest questions"
 .avatar : "Sends a direct link to your avatar"
-
+.ping : "Calculates and sends the bot's ping."
 
 COMMANDS FOR ADMINS/MODS ONLY:
 .kick @member : "kicks the mentioned user"
