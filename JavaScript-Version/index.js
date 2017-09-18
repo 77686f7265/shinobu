@@ -27,7 +27,7 @@ client.on('message', message => {
 						icon_url: client.user.avatarURL
 					},
 					title: "Shinobu's command list",
-					description: "Current version: __**0.7.0**__\nCommands that require an argument are highlighted like this: **argument**",
+					description: "Current version: __**1.0.0**__\nCommands that require an argument are highlighted like this: **argument**",
 					fields: [{
 							name: ":hammer_pick: Moderation :hammer_pick:",
 							value: ".kick **@member** : kicks the mentioned user.\n.ban **@member** : bans the mentioned user\n.purge **###** : Deletes up to 100 messages."
@@ -41,8 +41,12 @@ client.on('message', message => {
 							value: ".level **current** : Check your current level\n.level **reset** : Resets your level"
 						},
 						{
+							name: "Others:",
+							value: ".ping-bot : Sends the bot's ping."
+						},
+						{
 							name: ":telephone_receiver: Support :telephone_receiver:",
-							value: "Add NyanpasuOWO#2834 if you need help."
+							value: "Add Kizu The Maid#2834 if you need help."
 						}
 					],
 					timestamp: new Date(),
@@ -67,6 +71,7 @@ client.on('message', message => {
 			message.reply(message.author.avatarURL)
 		},
 		'purge': (message) => {
+			
 			var args = message.content.split(/[ ]+/);
 			var amountToDelete = args[1];
 			if (amountToDelete < 2) {
@@ -78,6 +83,8 @@ client.on('message', message => {
 				console.log(amountToDelete);
 				message.channel.sendMessage(`${amountToDelete - 1} messages have been deleted. :wastebasket:`).then(response => response.delete(3000));
 			}
+		
+		
 		},
 		'role': (message) => {
 
@@ -133,7 +140,7 @@ client.on('message', message => {
 		'nick': (message) => {
 				
 				var msg = message.content.split(' ');
-				if(msg.length < 1){
+				if(msg.length > 1){
 				msg.splice(0, 1);
 				var nick = msg.join(' ');
 				//var authorAt = message.mentions.members.first();
@@ -173,10 +180,21 @@ client.on('message', message => {
 				message.reply("Successfully reinitiliazed your level and points");
 	
 			}
+		},
+		'ping-bot': (message) =>{
+			
+
+			message.channel.send("Pinging.....").then(msg => msg.edit(`Pong! Latency is ${msg.createdTimestamp - message.createdTimestamp}ms. API Latency is ${Math.round(client.ping)}ms.`));
+			
+			
 		}
 
 
 	}
+	
+	
+	
+	
 	if (!points[message.author.id]) points[message.author.id] = {
 		points: 0,
 		level: 0
