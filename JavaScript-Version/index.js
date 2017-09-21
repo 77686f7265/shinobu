@@ -1,13 +1,13 @@
-const {
-	Client
-} = require('discord.js');
+const Discord = require("discord.js");
+const client = new Discord.Client();
 
 const tokens = require("./token.json");
 /////////////////////////// STOP /////////////////////////////
-const client = new Client();
+
 const prefix = ".";
 const adminID = "353655562447355905";
 const fs = require("fs");
+
 let points = JSON.parse(fs.readFileSync("./points.json", "utf8"));
 client.on('ready', () => {
 	console.log('Ready!');
@@ -27,14 +27,14 @@ client.on('message', message => {
 						icon_url: client.user.avatarURL
 					},
 					title: "Shinobu's command list",
-					description: "Current version: __**1.0.0**__\nCommands that require an argument are highlighted like this: **argument**",
+					description: "Current version: __**1.1.0**__\nCommands that require an argument are highlighted like this: **argument**",
 					fields: [{
 							name: ":hammer_pick: Moderation :hammer_pick:",
 							value: ".kick **@member** : kicks the mentioned user.\n.ban **@member** : bans the mentioned user\n.purge **###** : Deletes up to 100 messages."
 						},
 						{
 							name: ":white_check_mark: Commands anyone can use :white_check_mark: ",
-							value: ".quote : Prints out a random quote\n.nick **your nickname**(if no argument is specified, it will remove your current nickname): Changes your nickname on this server.\n.role **your role**: Assigns the role you want(as long as It doesn't require special permissions.)\n.8ball **your question **: Answers your weirdest questions.\n.avatar: Sends a direct link to your avatar."
+							value: ".mal **yourMALid**: Sends a link to your MAL profile.\n.quote : Prints out a random quote\n.nick **your nickname**(if no argument is specified, it will remove your current nickname): Changes your nickname on this server.\n.role **your role**: Assigns the role you want(as long as It doesn't require special permissions.)\n.8ball **your question **: Answers your weirdest questions.\n.avatar: Sends a direct link to your avatar."
 						},
 						{
 							name: "Levels",
@@ -42,7 +42,7 @@ client.on('message', message => {
 						},
 						{
 							name: "Others:",
-							value: ".ping-bot : Sends the bot's ping."
+							value: ".ping-bot : Sends the bot's ping.\n.uptime-bot : Prints out bot's uptime."
 						},
 						{
 							name: ":telephone_receiver: Support :telephone_receiver:",
@@ -187,6 +187,31 @@ client.on('message', message => {
 			message.channel.send("Pinging.....").then(msg => msg.edit(`Pong! Latency is ${msg.createdTimestamp - message.createdTimestamp}ms. API Latency is ${Math.round(client.ping)}ms.`));
 			
 			
+		},
+		'mal': (message) =>{
+			var animeLIST = "https://myanimelist.net/profile/";
+			var msg = message.content.split(' ');
+			var malID = msg[1];
+			message.channel.send(animeLIST + malID);
+		},
+		'uptime-bot':(message) => {
+			function format(seconds){
+				function pad(s){
+				  return (s < 10 ? '0' : '') + s;
+				}
+				var hours = Math.floor(seconds / (60*60));
+				var minutes = Math.floor(seconds % (60*60) / 60);
+				var seconds = Math.floor(seconds % 60);
+			  
+				return pad(hours) + ':' + pad(minutes) + ':' + pad(seconds);
+			  }
+			  
+			  var uptime = process.uptime();
+			  message.channel.send({embed: {
+				color: 3447003,
+				description: "I have been up for " + "**" + format(uptime) + "**"
+			  }});
+			  
 		}
 
 
