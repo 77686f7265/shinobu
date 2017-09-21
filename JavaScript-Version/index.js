@@ -63,7 +63,7 @@ client.on('message', message => {
 				process.exit();
 
 			} else {
-				message.reply("You are not my creator, you cannot restart me. ask `Nyanpasuowo#2834` if it is really needed.");
+				message.reply("You are not my creator, you cannot restart me. ask `Kizu The Maid#2834` if it is really needed.");
 			}
 		},
 		'avatar': (message) => {
