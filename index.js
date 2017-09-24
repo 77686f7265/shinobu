@@ -11,7 +11,7 @@ const fs = require("fs");
 let points = JSON.parse(fs.readFileSync("./points.json", "utf8"));
 client.on('ready', () => {
 	console.log('Ready!');
-	client.user.setGame("nyanpasuowo.github.io");
+	client.user.setGame(".help | v1.2.0");
 
 });
 
@@ -27,7 +27,7 @@ client.on('message', message => {
 						icon_url: client.user.avatarURL
 					},
 					title: "Shinobu's command list",
-					description: "Current version: __**1.1.0**__\nCommands that require an argument are highlighted like this: **argument**",
+					description: "Current version: __**1.2.0**__\nCommands that require an argument are highlighted like this: **argument**",
 					fields: [{
 							name: ":hammer_pick: Moderation :hammer_pick:",
 							value: ".kick **@member** : kicks the mentioned user.\n.ban **@member** : bans the mentioned user\n.purge **###** : Deletes up to 100 messages."
@@ -42,7 +42,7 @@ client.on('message', message => {
 						},
 						{
 							name: "Others:",
-							value: ".ping-bot : Sends the bot's ping.\n.uptime-bot : Prints out bot's uptime."
+							value: ".ping-bot : Sends the bot's ping.\n.uptime-bot : Prints out bot's uptime.\n.source **bot/author** : Sends a link to the bot's source code or the author's profile."
 						},
 						{
 							name: ":telephone_receiver: Support :telephone_receiver:",
@@ -212,6 +212,18 @@ client.on('message', message => {
 				description: "I have been up for " + "**" + format(uptime) + "**"
 			  }});
 			  
+		},
+		'source': (message) =>{
+			var msg = message.content.split(' ');
+			if(msg[1] == 'bot'){
+				message.reply("https://gitlab.com/kizuthemaid/shinobu");
+			}
+			else if(msg[1] == 'author'){
+				message.reply("https://gitlab.com/kizuthemaid");
+			}
+			else{
+				message.reply("invalid argument.");
+			}
 		}
 
 

@@ -1,0 +1,44 @@
+Current version: 1.2.0
+- Added a .source command
+- Changed game title
+
+1.1.0
+- Added .ping-bot command
+- Fixed a few bugs here and there
+
+1.0.0
+- First stable release
+- I don't remember what I did back then
+
+0.9.0
+- Added .mal command
+- Cleaned the code
+
+0.8.0
+- Improved the .nick command
+
+0.7.0
+- Added .quote command
+
+0.6.0
+- Added a command, I don't remember which one
+
+0.5.0
+- Added .kick command
+
+0.4.0
+- Added .ban command
+
+0.3.0
+- Fixed vulnerability that allowed non-admin people to assign admin related roles to themselves
+
+0.2.0
+- Added .purge command
+- Added .role command
+- Added .8ball command
+- Added .avatar command
+- Added leveling system
+- Made the .help command use embeds
+
+0.1.0
+- I don't remember
