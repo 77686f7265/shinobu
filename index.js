@@ -8,7 +8,7 @@ const prefix = ".";
 const adminID = "353655562447355905";
 const fs = require("fs");
 
-let points = JSON.parse(fs.readFileSync("./points.json", "utf8"));
+
 client.on('ready', () => {
 	console.log('Ready!');
 	client.user.setGame(".help | v1.2.0");
@@ -35,10 +35,6 @@ client.on('message', message => {
 						{
 							name: ":white_check_mark: Commands anyone can use :white_check_mark: ",
 							value: ".mal **yourMALid**: Sends a link to your MAL profile.\n.quote : Prints out a random quote\n.nick **your nickname**(if no argument is specified, it will remove your current nickname): Changes your nickname on this server.\n.role **your role**: Assigns the role you want(as long as It doesn't require special permissions.)\n.8ball **your question **: Answers your weirdest questions.\n.avatar: Sends a direct link to your avatar."
-						},
-						{
-							name: "Levels",
-							value: ".level **current** : Check your current level\n.level **reset** : Resets your level"
 						},
 						{
 							name: "Others:",
@@ -90,13 +86,19 @@ client.on('message', message => {
 
 			var args = message.content.split(' ');
 			if (args.length > 1) {
+			if(message.member.hasPermission("ADMINISTRATOR")){
 				args.splice(0, 1);
 				var role = args;
 				var roleString = role.join(' ');
 				var roleToAssign = message.guild.roles.find("name", roleString);
 				message.member.addRole(roleToAssign);
 				message.reply(`I hope you like your new role: ${roleToAssign}`);
-			} else {
+			}
+			else{
+				message.reply("You can't do that.")
+			}
+		} 
+			else {
 				message.reply('You need to specify a role.');
 			}
 		},
@@ -169,18 +171,7 @@ client.on('message', message => {
 			var randomQuotes = quotes[Math.floor(Math.random() * quotes.length)];
 			message.channel.send(randomQuotes);
 		},
-		'level':(message) =>{
-			var args = message.content.split(' ');
-			if (args[1] == 'current') {
-				message.reply(`You are currently level ${userData.level}, with ${userData.points} points.`);
-			}
-			if (args[1] == 'reset') {
-				userData.points = 0;
-				userData.level = 0;
-				message.reply("Successfully reinitiliazed your level and points");
-	
-			}
-		},
+		
 		'ping-bot': (message) =>{
 			
 
@@ -229,72 +220,6 @@ client.on('message', message => {
 
 	}
 	
-	
-	
-	
-	if (!points[message.author.id]) points[message.author.id] = {
-		points: 0,
-		level: 0
-	};
-	let userData = points[message.author.id];
-	userData.points++;
-
-	let curLevel = Math.floor(0.1 * Math.sqrt(userData.points));
-
-	switch (userData.points) {
-		case 10:
-			message.reply("You are now level 1!");
-			userData.level = 1;
-			break;
-		case 20:
-			message.reply("You are now level 2!");
-			userData.level = 2;
-			break;
-		case 30:
-			message.reply("You are now level 3!");
-			userData.level = 3;
-			break;
-		case 40:
-			message.reply("You are now level 4!");
-			userData.level = 4;
-			break;
-		case 50:
-			message.reply("You are now level 5!");
-			userData.level = 5;
-			break;
-		case 60:
-			message.reply("You are now level 6!");
-			userData.level = 6;
-			break;
-		case 70:
-			message.reply("You are now level 7!");
-			userData.level = 7;
-			break;
-		case 80:
-			message.reply("You are now level 8!");
-			userData.level = 8;
-			break;
-		case 90:
-			message.reply("You are now level 9!");
-			userData.level = 9;
-			break;
-		case 100:
-			message.reply("You are now level 10! You have reached the maximum level. :party:");
-			userData.level = 10;
-			break;
-		default:
-			break;
-	}
-	/*if(userData.points == 10 || userData.points == 20){
-		  userData.level = 1;
-		  message.reply("You have leveled up to **level 1**. ");
-	  }*/
-
-	
-	fs.writeFile("./points.json", JSON.stringify(points), (err) => {
-		if (err) console.error(err)
-	});
-
 	if (!message.content.startsWith(prefix)) return;
 	if (commands.hasOwnProperty(message.content.toLowerCase().slice(prefix.length).split(' ')[0])) commands[message.content.toLowerCase().slice(prefix.length).split(' ')[0]](message);
 });
